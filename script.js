@@ -1,3 +1,47 @@
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    // Hide the loading container and show the main content
+    document.querySelector(".loading-container").style.display = "none";
+    document.body.style.overflow = "auto";
+  }, 4000); // Set the time (in milliseconds) for the loading animation to be shown (e.g., 4000ms = 4 seconds)
+
+  const quotes = document.querySelectorAll(".loading-quotes p");
+  const loadingQuotes = document.querySelector(".loading-quotes");
+  let currentIndex = 0;
+
+  function showNextQuote() {
+    if (currentIndex < quotes.length) {
+      quotes[currentIndex].style.opacity = "1"; // Show the quote
+
+      setTimeout(function () {
+        quotes[currentIndex].style.opacity = "0"; // Fade out the quote
+        setTimeout(function () {
+          currentIndex++;
+          showNextQuote(); // Show the next quote after a delay
+        }, 500); // Delay before showing the next quote (e.g., 500ms = 0.5 seconds)
+      }, 1500); // Time to display the quote before fading out (e.g., 1500ms = 1.5 seconds)
+    } else {
+      loadingQuotes.style.display = "none"; // Hide the loading quotes container after showing all quotes
+    }
+  }
+
+  // Hide all quotes initially
+  quotes.forEach(quote => {
+    quote.style.opacity = "0";
+  });
+
+  showNextQuote(); // Start showing quotes
+});
+
+
+
+
+
+
+
+
+
+
 const burgerMenu = document.querySelector('.burger-menu');
 const navLinks = document.querySelector('.nav-links');
 const navLinksDuplicate = navLinks.cloneNode(true); // Duplicate the nav-links
